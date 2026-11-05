@@ -1,0 +1,17 @@
+# Opcional: Render lee este archivo si usas "Blueprint". También puedes crear todo a mano (ver README).
+services:
+  - type: web
+    name: peliculas-app
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        sync: false          # pega aquí la "Internal Database URL" de tu PostgreSQL de Render
+      - key: JWT_SECRET
+        generateValue: true  # Render genera una clave aleatoria
+      - key: JWT_EXPIRES_IN
+        value: 8h
+      - key: DB_SSL
+        value: "true"

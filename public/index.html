@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi cartelera · Control de películas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============ Acceso ============ -->
+  <main id="vista-acceso" class="acceso">
+    <section class="acceso-intro">
+      <h1>Tu cartelera personal</h1>
+      <p>Anota lo que quieres ver, marca lo que ya viste y guarda tu calificación de cada película.</p>
+    </section>
+
+    <section class="acceso-form">
+      <div class="pestanas" role="tablist">
+        <button id="tab-login" role="tab" aria-selected="true">Iniciar sesión</button>
+        <button id="tab-registro" role="tab" aria-selected="false">Crear cuenta</button>
+      </div>
+
+      <form id="form-login" class="form">
+        <label>Correo
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>Contraseña
+          <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+        <button class="btn btn-primario" type="submit">Entrar</button>
+      </form>
+
+      <form id="form-registro" class="form" hidden>
+        <label>Nombre
+          <input type="text" name="nombre" autocomplete="name" required>
+        </label>
+        <label>Correo
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>Contraseña (mínimo 6 caracteres)
+          <input type="password" name="password" minlength="6" autocomplete="new-password" required>
+        </label>
+        <button class="btn btn-primario" type="submit">Crear cuenta</button>
+      </form>
+
+      <p id="msg-acceso" class="mensaje" role="alert"></p>
+    </section>
+  </main>
+
+  <!-- ============ Aplicación ============ -->
+  <div id="vista-app" hidden>
+    <header class="barra">
+      <span class="marca">Mi cartelera</span>
+      <div class="barra-usuario">
+        <span id="nombre-usuario"></span>
+        <button id="btn-salir" class="btn btn-texto">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <main class="contenido">
+      <section class="resumen" aria-label="Resumen">
+        <p><strong id="r-total">0</strong> películas</p>
+        <p><strong id="r-vistas">0</strong> vistas</p>
+        <p><strong id="r-pendientes">0</strong> por ver</p>
+        <p>Promedio <strong id="r-promedio">–</strong></p>
+      </section>
+
+      <section class="herramientas">
+        <input id="buscar" type="search" placeholder="Buscar por título, director o género">
+        <select id="filtro-estado" aria-label="Filtrar por estado">
+          <option value="">Todas</option>
+          <option value="pendiente">Por ver</option>
+          <option value="vista">Vistas</option>
+        </select>
+        <button id="btn-nueva" class="btn btn-primario">Agregar película</button>
+      </section>
+
+      <p id="msg-app" class="mensaje" role="alert"></p>
+      <ul id="lista" class="lista"></ul>
+      <p id="vacio" class="vacio" hidden>Todavía no hay películas aquí. Agrega la primera con el botón de arriba.</p>
+    </main>
+  </div>
+
+  <!-- ============ Formulario de película ============ -->
+  <dialog id="dialogo">
+    <form id="form-pelicula" class="form" method="dialog">
+      <h2 id="dialogo-titulo">Agregar película</h2>
+      <input type="hidden" name="id">
+
+      <label>Título
+        <input type="text" name="titulo" maxlength="200" required>
+      </label>
+
+      <div class="fila">
+        <label>Director
+          <input type="text" name="director" maxlength="150">
+        </label>
+        <label>Género
+          <input type="text" name="genero" maxlength="60">
+        </label>
+      </div>
+
+      <div class="fila tres">
+        <label>Año
+          <input type="number" name="anio" min="1888" max="2100">
+        </label>
+        <label>Duración (min)
+          <input type="number" name="duracion_min" min="1">
+        </label>
+        <label>Calificación (0–10)
+          <input type="number" name="calificacion" min="0" max="10" step="0.1">
+        </label>
+      </div>
+
+      <label>Estado
+        <select name="estado">
+          <option value="pendiente">Por ver</option>
+          <option value="vista">Vista</option>
+        </select>
+      </label>
+
+      <label>Sinopsis o notas
+        <textarea name="sinopsis" rows="3"></textarea>
+      </label>
+
+      <p id="msg-dialogo" class="mensaje" role="alert"></p>
+
+      <div class="acciones">
+        <button type="button" id="btn-cancelar" class="btn btn-texto">Cancelar</button>
+        <button type="submit" class="btn btn-primario">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

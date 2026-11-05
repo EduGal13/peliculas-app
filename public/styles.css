@@ -1,0 +1,184 @@
+:root {
+  --fondo: #13262b;
+  --panel: #1b343b;
+  --panel-2: #22414a;
+  --linea: #35565e;
+  --texto: #eaf0e8;
+  --texto-suave: #9db5b4;
+  --ambar: #f2b84b;
+  --ambar-osc: #1c1405;
+  --peligro: #ee7d8a;
+  --ok: #86d6b4;
+  --radio: 10px;
+  --fuente-titulo: "Bricolage Grotesque", system-ui, sans-serif;
+  --fuente: "Instrument Sans", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1, h2 { font-family: var(--fuente-titulo); line-height: 1.1; margin: 0; }
+
+:focus-visible { outline: 2px solid var(--ambar); outline-offset: 2px; }
+
+/* ---------- Botones y campos ---------- */
+.btn {
+  font: inherit; font-weight: 600;
+  border: 0; border-radius: var(--radio);
+  padding: .65rem 1.1rem; cursor: pointer;
+}
+.btn-primario { background: var(--ambar); color: var(--ambar-osc); }
+.btn-primario:hover { filter: brightness(1.08); }
+.btn-texto { background: transparent; color: var(--texto-suave); padding: .5rem .7rem; }
+.btn-texto:hover { color: var(--texto); }
+.btn-peligro:hover { color: var(--peligro); }
+
+.form { display: grid; gap: 1rem; }
+.form label { display: grid; gap: .35rem; font-size: .92rem; color: var(--texto-suave); }
+
+input, select, textarea {
+  font: inherit; color: var(--texto);
+  background: var(--fondo);
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  padding: .6rem .75rem;
+  width: 100%;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--ambar); outline: none; }
+textarea { resize: vertical; }
+
+.fila { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.fila.tres { grid-template-columns: repeat(3, 1fr); }
+
+.mensaje { min-height: 1.4rem; margin: 0; font-size: .92rem; color: var(--peligro); }
+.mensaje.ok { color: var(--ok); }
+
+/* ---------- Acceso ---------- */
+.acceso {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+}
+.acceso-intro {
+  padding: 4rem 3.5rem;
+  display: flex; flex-direction: column; justify-content: center; gap: 1.25rem;
+  background:
+    radial-gradient(circle at 0 100%, var(--panel-2) 0, transparent 55%),
+    var(--panel);
+  border-right: 1px solid var(--linea);
+}
+.acceso-intro h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); font-weight: 800; letter-spacing: -.02em; }
+.acceso-intro p { max-width: 34ch; font-size: 1.15rem; color: var(--texto-suave); margin: 0; }
+
+.acceso-form {
+  padding: 3rem 3.5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  max-width: 480px; width: 100%; margin: 0 auto;
+  gap: 1.25rem;
+}
+
+.pestanas { display: flex; gap: .25rem; border-bottom: 1px solid var(--linea); }
+.pestanas button {
+  font: inherit; font-weight: 600;
+  background: none; border: 0; cursor: pointer;
+  color: var(--texto-suave);
+  padding: .6rem .9rem;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.pestanas button[aria-selected="true"] { color: var(--texto); border-bottom-color: var(--ambar); }
+
+/* ---------- App ---------- */
+.barra {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .9rem clamp(1rem, 4vw, 2.5rem);
+  border-bottom: 1px solid var(--linea);
+  background: var(--panel);
+}
+.marca { font-family: var(--fuente-titulo); font-weight: 800; font-size: 1.3rem; }
+.barra-usuario { display: flex; align-items: center; gap: .5rem; color: var(--texto-suave); }
+
+.contenido { max-width: 960px; margin: 0 auto; padding: 2rem clamp(1rem, 4vw, 2rem) 4rem; }
+
+.resumen { display: flex; flex-wrap: wrap; gap: .5rem 2rem; margin-bottom: 1.5rem; color: var(--texto-suave); }
+.resumen p { margin: 0; }
+.resumen strong { font-family: var(--fuente-titulo); font-size: 1.6rem; color: var(--texto); margin-right: .2rem; }
+
+.herramientas { display: grid; grid-template-columns: 1fr auto auto; gap: .75rem; margin-bottom: .75rem; }
+.herramientas select { width: auto; }
+
+/* ---------- Lista: cada película es un boleto ---------- */
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
+
+.boleto {
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  background: var(--panel);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  position: relative;
+}
+.boleto-talon {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 1rem .5rem;
+  border-right: 2px dashed var(--linea);
+  gap: .2rem;
+  text-align: center;
+}
+.nota { font-family: var(--fuente-titulo); font-weight: 800; font-size: 2rem; line-height: 1; }
+.nota.sin { color: var(--texto-suave); }
+.estado { font-size: .8rem; color: var(--texto-suave); }
+.estado.vista { color: var(--ok); }
+
+/* muescas del boleto */
+.boleto::before, .boleto::after {
+  content: ""; position: absolute; left: 96px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--fondo); border: 1px solid var(--linea);
+  transform: translateX(-50%);
+}
+.boleto::before { top: -9px; clip-path: inset(50% 0 0 0); }
+.boleto::after  { bottom: -9px; clip-path: inset(0 0 50% 0); }
+
+.boleto-cuerpo { padding: 1rem 1.25rem; min-width: 0; }
+.boleto-cuerpo h2 { font-size: 1.3rem; font-weight: 700; }
+.datos { margin: .25rem 0 0; color: var(--texto-suave); font-size: .93rem; }
+.sinopsis { margin: .6rem 0 0; font-size: .95rem; max-width: 62ch; }
+
+.boleto-acciones { display: flex; flex-direction: column; justify-content: center; padding: .5rem; }
+
+.vacio { text-align: center; color: var(--texto-suave); padding: 3rem 1rem; }
+
+/* ---------- Diálogo ---------- */
+dialog {
+  width: min(560px, calc(100vw - 2rem));
+  background: var(--panel); color: var(--texto);
+  border: 1px solid var(--linea); border-radius: 14px;
+  padding: 1.75rem;
+}
+dialog::backdrop { background: rgba(5, 12, 14, .7); }
+dialog h2 { font-size: 1.6rem; }
+.acciones { display: flex; justify-content: flex-end; gap: .5rem; }
+
+/* ---------- Móvil ---------- */
+@media (max-width: 760px) {
+  .acceso { grid-template-columns: 1fr; }
+  .acceso-intro { padding: 2.5rem 1.5rem; border-right: 0; border-bottom: 1px solid var(--linea); }
+  .acceso-form { padding: 2rem 1.5rem; }
+  .herramientas { grid-template-columns: 1fr 1fr; }
+  .herramientas input { grid-column: 1 / -1; }
+  .boleto { grid-template-columns: 78px 1fr; }
+  .boleto::before, .boleto::after { left: 78px; }
+  .boleto-acciones { grid-column: 1 / -1; flex-direction: row; justify-content: flex-end; border-top: 1px solid var(--linea); }
+  .fila, .fila.tres { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
